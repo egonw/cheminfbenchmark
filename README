@@ -1,0 +1,33 @@
+Cheminformatics Benchmark Toolkit
+---------------------------------
+
+Why? Because we want to:
+
+1. measure if a patch improves performance
+2. compare cheminformatics toolkits
+
+Project
+-------
+
+This is an open project, and anyone can contribute or patch the
+tests, in order to attempt to create a balanced and fair test suite
+in partial to the toolkit being tested.
+
+Versioning
+----------
+
+When reporting results for a toolkit for a test, always report the
+version of ChemInfBenchmark release, as well as the test number as
+listed below.
+
+The tests
+---------
+
+Toolkits should always to the bare minimum; any extra things will only
+make the outcome unfavourable, but toolkits may do that if they wish.
+
+1. Convert an SD file to XYZ
+2. Calculate the molecular mass of the entries in a SD file
+3. Convert an SD file to CML 2.5
+
+
