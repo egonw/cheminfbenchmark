@@ -29,5 +29,6 @@ make the outcome unfavourable, but toolkits may do that if they wish.
 1. Convert an SD file to XYZ
 2. Calculate the molecular mass of the entries in a SD file
 3. Convert an SD file to CML 2.5
+4. Perform a substructure match on all of the entries in an SD file
 
 
