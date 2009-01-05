@@ -11,7 +11,7 @@ Project
 
 This is an open project, and anyone can contribute or patch the
 tests, in order to attempt to create a balanced and fair test suite
-in partial to the toolkit being tested.
+impartial to the toolkit being tested.
 
 Versioning
 ----------
@@ -27,8 +27,9 @@ Toolkits should always to the bare minimum; any extra things will only
 make the outcome unfavourable, but toolkits may do that if they wish.
 
 1. Convert an SD file to XYZ
-2. Calculate the molecular mass of the entries in a SD file
+2. Calculate the molecular mass of the entries in an SD file
 3. Convert an SD file to CML 2.5
 4. Perform a substructure match on all of the entries in an SD file
+5. Parse a collection of SMILES - this will be a measure of performance and completeness
 
 
