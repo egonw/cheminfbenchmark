@@ -31,5 +31,5 @@ make the outcome unfavourable, but toolkits may do that if they wish.
 3. Convert an SD file to CML 2.5
 4. Perform a substructure match on all of the entries in an SD file
 5. Parse a collection of SMILES - this will be a measure of performance and completeness
-
+6. Detect rings in a collection of molecules.
 
