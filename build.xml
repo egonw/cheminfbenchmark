@@ -14,10 +14,12 @@
   <property name="doc.dir" location="${build.dir}/doc" />
   <property name="dist.dir" location="${build.dir}/dist" />
   <property name="test.dir" location="${build.dir}/test" />
+  <property name="reports.dir" location="${build.dir}/reports" />
   <property name="lib-licenses.file" location="${lib.dir}/LICENSES.txt" />
   <property name="license.file" location="LICENSE.txt" />
   <property name="junit.lib" value="${lib.dir}/junit-4.5.jar" />
   <property name="test.class" value = "net.openmolecules.benchmark.test.Main" />
+  <property name="config" value="config.xml"/>
   <!-- filesets -->
   <fileset dir="${lib.dir}" id="libs">
     <include name="**/*.jar" />
@@ -57,7 +59,7 @@
       <classpath>
         <fileset refid="libs" />
       </classpath>
-      <bottom><![CDATA[<i>Copyright &copy; 2007, 2008 <a href="http://metamolecular.com">Metamolecular, LLC</a>. All Rights Reserved.</i>]]>
+      <bottom><![CDATA[<i>Copyright &copy; 2009 <a href="http://metamolecular.com">Metamolecular, LLC</a>. All Rights Reserved.</i>]]>
       </bottom>
     </javadoc>
   </target>
@@ -85,5 +87,13 @@
       <tarfileset dir="${dist.dir}" prefix="${unix-name}-${version}-src">
       </tarfileset>
     </tar>
+  </target>
+  <target name="run" depends="dist" description="Run the benchmarks and create reports.">
+    <java fork="true" classname="com.sun.japex.Japex">
+      <classpath>
+        <fileset refid="libs" />
+      </classpath>
+      <arg line="${config}/"/>
+    </java>
   </target>
 </project>
