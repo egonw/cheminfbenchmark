@@ -22,20 +22,26 @@
  * THE SOFTWARE.
  */
 
-package net.openmolecules.benchmark.test;
+package net.openmolecules.benchmark.driver;
 
-import junit.framework.TestSuite;
-import junit.textui.TestRunner;
+import com.sun.japex.JapexDriverBase;
+import com.sun.japex.TestCase;
 
 /**
  * @author Richard L. Apodaca
  */
-public class Main
+public class SimpleBench extends JapexDriverBase
 {
-  public static void main(String[] args)
+  @Override
+  public void run(TestCase testCase)
   {
-    TestSuite suite = new TestSuite();
-
-    TestRunner.run(suite);
+    int tally = 0;
+    
+    for (int i = 0; i < 100000; i++)
+    {
+      tally += i*tally;
+    }
+    
+    
   }
 }

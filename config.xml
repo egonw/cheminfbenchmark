@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testSuite name="SimpleBench" xmlns="http://www.sun.com/japex/testSuite">
+  <param name="japex.classPath" value="build/classes"/>
+  <param name="japex.resultUnit" value="ms"/>
+  <param name="japex.warmupIterations" value="0"/>
+  <param name="japex.runIterations" value="40"/>
+  <param name="japex.reportsDirectory" value="build/reports" />
+  <driver name="SimpleTest">
+    <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.SimpleBench"/>
+    <param name="description" value="Just to get something working"/>
+  </driver>
+  <testCase name="test1"/>
+  <testCase name="test2"/>
+  <testCase name="test3"/>
+</testSuite>
