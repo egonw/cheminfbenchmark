@@ -1,69 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- You may freely edit this file. See commented blocks below for -->
-<!-- some examples of how to customize the build. -->
-<!-- (If you delete it and reopen the project it will be recreated.) -->
-<project name="cheminfbenchmark" default="default" basedir=".">
-    <description>Builds, tests, and runs the project cheminfbenchmark.</description>
-    <import file="nbproject/build-impl.xml"/>
-    <!--
-
-    There exist several targets which are by default empty and which can be 
-    used for execution of your tasks. These targets are usually executed 
-    before and after some main targets. They are: 
-
-      -pre-init:                 called before initialization of project properties
-      -post-init:                called after initialization of project properties
-      -pre-compile:              called before javac compilation
-      -post-compile:             called after javac compilation
-      -pre-compile-single:       called before javac compilation of single file
-      -post-compile-single:      called after javac compilation of single file
-      -pre-compile-test:         called before javac compilation of JUnit tests
-      -post-compile-test:        called after javac compilation of JUnit tests
-      -pre-compile-test-single:  called before javac compilation of single JUnit test
-      -post-compile-test-single: called after javac compilation of single JUunit test
-      -pre-jar:                  called before JAR building
-      -post-jar:                 called after JAR building
-      -post-clean:               called after cleaning build products
-
-    (Targets beginning with '-' are not intended to be called on their own.)
-
-    Example of inserting an obfuscator after compilation could look like this:
-
-        <target name="-post-compile">
-            <obfuscate>
-                <fileset dir="${build.classes.dir}"/>
-            </obfuscate>
-        </target>
-
-    For list of available properties check the imported 
-    nbproject/build-impl.xml file. 
-
-
-    Another way to customize the build is by overriding existing main targets.
-    The targets of interest are: 
-
-      -init-macrodef-javac:     defines macro for javac compilation
-      -init-macrodef-junit:     defines macro for junit execution
-      -init-macrodef-debug:     defines macro for class debugging
-      -init-macrodef-java:      defines macro for class execution
-      -do-jar-with-manifest:    JAR building (if you are using a manifest)
-      -do-jar-without-manifest: JAR building (if you are not using a manifest)
-      run:                      execution of project 
-      -javadoc-build:           Javadoc generation
-      test-report:              JUnit report generation
-
-    An example of overriding the target for project execution could look like this:
-
-        <target name="run" depends="cheminfbenchmark-impl.jar">
-            <exec dir="bin" executable="launcher.exe">
-                <arg file="${dist.jar}"/>
-            </exec>
-        </target>
-
-    Notice that the overridden target depends on the jar target and not only on 
-    the compile target as the regular run target does. Again, for a list of available 
-    properties which you can use, check the target you are overriding in the
-    nbproject/build-impl.xml file. 
-
-    -->
+<project name="Cheminformatics Benchmark" default="compile" basedir=".">
+  <!-- properties -->
+  <property name="full-name" value="Cheminformatics Benchmark" />
+  <property name="unix-name" value="benchmark" />
+  <property name="version" value="0.1.0" />
+  <property name="source.dir" location="src" />
+  <property name="resource.dir" location="resources" />
+  <property name="lib.dir" location="lib" />
+  <property name="build.dir" location="build" />
+  <property name="class.dir" location="${build.dir}/classes" />
+  <property name="jar.dir" location="${build.dir}/jar" />
+  <property name="tgz.dir" location="${build.dir}/tgz" />
+  <property name="doc.dir" location="${build.dir}/doc" />
+  <property name="dist.dir" location="${build.dir}/dist" />
+  <property name="test.dir" location="${build.dir}/test" />
+  <property name="lib-licenses.file" location="${lib.dir}/LICENSES.txt" />
+  <property name="license.file" location="LICENSE.txt" />
+  <property name="junit.lib" value="${lib.dir}/junit-4.5.jar" />
+  <property name="test.class" value = "net.openmolecules.benchmark.test.Main" />
+  <!-- filesets -->
+  <fileset dir="${lib.dir}" id="libs">
+    <include name="**/*.jar" />
+  </fileset>
+  <!-- targets -->
+  <target name="init" description="Create build directories." >
+    <mkdir dir="${build.dir}" />
+    <mkdir dir="${class.dir}" />
+    <mkdir dir="${jar.dir}" />
+    <mkdir dir="${doc.dir}" />
+    <mkdir dir="${tgz.dir}" />
+    <mkdir dir="${test.dir}" />
+  </target>
+  <target name="clean" description="Remove build directories.">
+    <delete dir="${build.dir}" />
+    <delete dir="${doc.dir}" />
+  </target>
+  <target name="compile" depends="init" description="Compile sources.">
+    <javac srcdir="${source.dir}" destdir="${class.dir}" includes="net/openmolecules/benchmark/**/*.java" debug="on" source="1.5" target="1.5">
+      <classpath>
+        <fileset refid="libs" />
+      </classpath>
+    </javac>
+  </target>
+  <target name="test" depends="compile" description="Run JUnit tests.">
+    <java classname="${test.class}" fork = "true" dir="${build.dir}">
+      <classpath>
+        <pathelement path="${class.dir}" />
+        <fileset refid="libs" />
+      </classpath>
+    </java>
+  </target>
+  <target name="doc" depends="compile" description="Create Java Doc.">
+    <javadoc sourcepath="${source.dir}" packagenames="*" destdir="${doc.dir}" windowtitle="${full-name} API" excludepackagenames="net.openmolecules.benchmark.test">
+      <doctitle>${full-name} v${version}</doctitle>
+      <header>${full-name} v${version}</header>
+      <classpath>
+        <fileset refid="libs" />
+      </classpath>
+      <bottom><![CDATA[<i>Copyright &copy; 2007, 2008 <a href="http://metamolecular.com">Metamolecular, LLC</a>. All Rights Reserved.</i>]]>
+      </bottom>
+    </javadoc>
+  </target>
+  <target name="jar" depends="compile" description="Create the jarfile.">
+    <jar jarfile="${jar.dir}/${unix-name}-${version}.jar" basedir="${class.dir}" excludes="net/openmolecules/benchmark/test/**" >
+    </jar>
+  </target>
+  <target name="dist" depends="init,compile,doc" description="Create the source distribution.">
+    <mkdir dir="${dist.dir}/lib" />
+    <mkdir dir="${dist.dir}/src" />
+    <mkdir dir="${dist.dir}/doc" />
+    <copy file="${junit.lib}" todir="${dist.dir}/lib" />
+    <copy file="${lib-licenses.file}" todir="${dist.dir}/lib" />
+    <copy file="${license.file}" todir="${dist.dir}" />
+    <copy todir="${dist.dir}/src">
+      <fileset dir="${source.dir}" includes="net/openmolecules/benchmark/**/*.java" />
+    </copy>
+    <copy todir="${dist.dir}/doc">
+      <fileset dir="${doc.dir}" />
+    </copy>
+    <copy file="build.xml" todir="${dist.dir}" />
+  </target>
+  <target name="tgz" depends="dist" description="Create a compressed distribution tarfile.">
+    <tar destfile="${tgz.dir}/${unix-name}-${version}-src.tar.gz" compression="gzip">
+      <tarfileset dir="${dist.dir}" prefix="${unix-name}-${version}-src">
+      </tarfileset>
+    </tar>
+  </target>
 </project>
