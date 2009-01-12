@@ -1,4 +1,6 @@
 nbproject
 build
-
+*.ipr
+*.iml
+*.iws
 .DS_Store
