@@ -4,8 +4,8 @@
 
     <param name="japex.classPath" value="build/classes"/>
     <param name="japex.resultUnit" value="ms"/>
-    <param name="japex.warmupIterations" value="10"/>
-    <param name="japex.runIterations" value="50"/>
+    <param name="japex.warmupIterations" value="5"/>
+    <param name="japex.runIterations" value="10"/>
     <param name="japex.reportsDirectory" value="build/reports"/>
 
 
@@ -13,14 +13,16 @@
         <driver name="CDK-1.2.x">
             <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.SMILESParseCDKBench"/>
             <param name="japex.classPath" value="${basedir}/lib/cdk-1.2.x-20090112.jar"/>
-            <param name="description" value="T#5 - reads 1600 SMILES strings into a String[], time to parse them all.
-            No further action (aromaticity, atom typing etc) is taken."/>
+            <param name="description" value="T#5 - reads 773 SMILES strings into a String[], time to parse them all.
+            However the SMILES parser currently
+            performs atom typing and aromaticity perception within the parse method"/>
         </driver>
         <driver name="CDK-trunk-13858">
             <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.SMILESParseCDKBench"/>
             <param name="japex.classPath" value="${basedir}/lib/cdk-trunk-13858.jar"/>
-            <param name="description" value="T#5 - reads 1600 SMILES strings into a String[], time to parse them all.
-            No further action (aromaticity, atom typing etc) is taken."/>
+            <param name="description" value="T#5 - reads 773 SMILES strings into a String[], time to parse them all.
+             However the SMILES parser currently
+            performs atom typing and aromaticity perception within the parse method"/>
         </driver>
     </driverGroup>
 
