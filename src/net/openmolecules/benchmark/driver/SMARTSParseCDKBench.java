@@ -27,6 +27,7 @@ package net.openmolecules.benchmark.driver;
 import com.sun.japex.JapexDriverBase;
 import com.sun.japex.TestCase;
 import org.openscience.cdk.smiles.smarts.parser.SMARTSParser;
+import org.openscience.cdk.smiles.smarts.parser.TokenMgrError;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class SMARTSParseCDKBench extends JapexDriverBase {
                 parse(pattern);
                 tally++;
             } catch (Exception e) {
-
+            } catch (TokenMgrError e) {
             }
         }
     }
