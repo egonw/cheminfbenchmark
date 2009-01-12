@@ -13,24 +13,20 @@
         <driver name="CDK-1.2.x">
             <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.SMARTSParseCDKBench"/>
             <param name="japex.classPath" value="${basedir}/lib/cdk-1.2.x-20090112.jar"/>
-            <param name="description" value="T#7 - reads SMARTS patterns into a String[], time to parse them all. Due
+            <param name="description" value="T#7 - reads 260 SMARTS patterns into a String[], time to parse them all. Due
             to the nature of the parser, each parse operation necessitates instantiation of a new SMARTSParser object
-            whose time is this included in the parse time."/>
+            whose time is thus included in the parse time."/>
         </driver>
         <driver name="CDK-trunk-13858">
             <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.SMARTSParseCDKBench"/>
             <param name="japex.classPath" value="${basedir}/lib/cdk-trunk-13858.jar"/>
-            <param name="description" value="T#7 - reads SMARTS patterns into a String[], time to parse them all. Due
+            <param name="description" value="T#7 - reads 260 SMARTS patterns into a String[], time to parse them all. Due
             to the nature of the parser, each parse operation necessitates instantiation of a new SMARTSParser object
-            whose time is this included in the parse time."/>
+            whose time is thus included in the parse time."/>
         </driver>
     </driverGroup>
 
     <testCase name="test1">
         <param name="japex.inputFile" value="data/smarts-patterns.txt" />
-    </testCase>
-    <!--
-      <testCase name="test2"/>
-      <testCase name="test3"/>
-    -->
+    </testCase>    
 </testSuite>
