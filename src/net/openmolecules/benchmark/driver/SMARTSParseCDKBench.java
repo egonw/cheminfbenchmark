@@ -34,6 +34,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *  Benchmark for SMARTS parsing (test 7 in the README).
+ *
+ * Ideally, we'd like to report time per pattern rather than
+ * total time to parse all the SMARTS. Probably soemthing to
+ * do with the finish(TestCase) method.
+ *
  * @author Rajarshi Guha
  */
 public class SMARTSParseCDKBench extends JapexDriverBase {
