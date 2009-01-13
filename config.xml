@@ -9,18 +9,16 @@
     <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.SimpleBench"/>
     <param name="description" value="Just to get something working"/>
   </driver>
-
   <driverGroup name="EvenCheckGroup" xmlns="http://www.sun.com/japex/testSuite">
-      <driver name="ModulusBench" >
-	  <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.ModulusBench"/>
-	  <param name="description" value="A simple benchmark of the modulus operator"/>
-      </driver>
-      <driver name="BadEvenCheckBench" normal="true">
-	  <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.BadEvenCheckBench"/>
-	  <param name="description" value="A simple benchmark of identifying even numbers using an inefficient method"/>
-      </driver>
+    <driver name="ModulusBench" >
+      <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.ModulusBench"/>
+      <param name="description" value="A simple benchmark of the modulus operator"/>
+    </driver>
+    <driver name="BadEvenCheckBench" normal="true">
+      <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.BadEvenCheckBench"/>
+      <param name="description" value="A simple benchmark of identifying even numbers using an inefficient method"/>
+    </driver>
   </driverGroup>
-
   <testCase name="test1"/>
 <!--  
   <testCase name="test2"/>
