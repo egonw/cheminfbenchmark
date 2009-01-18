@@ -26,12 +26,14 @@ package net.openmolecules.benchmark.driver;
 
 import com.sun.japex.JapexDriverBase;
 import com.sun.japex.TestCase;
-import org.openscience.cdk.DefaultChemObjectBuilder;
+import org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector;
 import org.openscience.cdk.exception.CDKException;
+import org.openscience.cdk.fingerprint.ExtendedFingerprinter;
 import org.openscience.cdk.fingerprint.Fingerprinter;
+import org.openscience.cdk.fingerprint.IFingerprinter;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.io.iterator.IteratingSMILESReader;
-import org.openscience.cdk.smiles.SmilesParser;
+import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -49,31 +51,37 @@ import java.util.List;
  */
 public class FingerprintCDKBench extends JapexDriverBase {
     private List<IAtomContainer> mols;
-    private SmilesParser smilesParser;
-    private Fingerprinter fingerprinter;
-
-    private int length = 6;
-    private int depth = 1024;
+    private IFingerprinter fingerprinter;
 
     public void initializeDriver() {
     }
 
     public void prepare(TestCase testCase) {
-        fingerprinter = new Fingerprinter(length, depth);
-        smilesParser = new SmilesParser(DefaultChemObjectBuilder.getInstance());
         String fileName = testCase.getParam("japex.inputFile");
+        int length = Integer.parseInt(testCase.getParam("fplength"));
+        int depth = Integer.parseInt(testCase.getParam("fpdepth"));
+        String type = testCase.getParam("type");
+        if (type.equals("standard")) fingerprinter = new Fingerprinter(length, depth);
+        else if (type.equals("extended")) fingerprinter = new ExtendedFingerprinter(length, depth);
+
         mols = new ArrayList<IAtomContainer>();
         try {
             IteratingSMILESReader reader = new IteratingSMILESReader(new FileInputStream(fileName));
-            while (reader.hasNext()) mols.add((IAtomContainer) reader.next());
+            while (reader.hasNext()) {
+                IAtomContainer tmp = (IAtomContainer) reader.next();
+                AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(tmp);
+                CDKHueckelAromaticityDetector.detectAromaticity(tmp);
+                mols.add(tmp);
+            }
         } catch (FileNotFoundException e) {
+        } catch (CDKException e) {            
         }
     }
 
     public void run(TestCase testCase) {
         for (IAtomContainer atomContainer : mols) {
             try {
-                fingerprinter.getFingerprint(atomContainer);
+                fingerprinter.getFingerprint(atomContainer);                
             } catch (CDKException e) {
             }
         }
