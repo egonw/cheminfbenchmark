@@ -12,7 +12,7 @@
     <driverGroup name="SMILESParsing" xmlns="http://www.sun.com/japex/testSuite">
         <driver name="CDK-1.2.x">
             <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.SMILESParseCDKBench"/>
-            <param name="japex.classPath" value="${basedir}/lib/cdk-1.2.x-20090112.jar"/>
+            <param name="japex.classPath" value="${basedir}/lib/cdk-1.2.x-20090116.jar"/>
             <param name="description" value="T#5 - reads 773 SMILES strings into a String[], time to parse them all.
             However the SMILES parser currently
             performs atom typing and aromaticity perception within the parse method"/>
