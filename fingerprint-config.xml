@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testSuite name="CheminfoBench" xmlns="http://www.sun.com/japex/testSuite">
+    <param name="basedir" value="."/>
+
+    <param name="japex.classPath" value="build/classes"/>
+    <param name="japex.resultUnit" value="ms"/>
+    <param name="japex.warmupIterations" value="10"/>
+    <param name="japex.runIterations" value="50"/>
+    <param name="japex.reportsDirectory" value="build/reports"/>
+
+
+    <driverGroup name="SubgraphIsomorphism" xmlns="http://www.sun.com/japex/testSuite">
+        <driver name="CDK-1.2.x">
+            <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.FingerprintCDKBench"/>
+            <param name="japex.classPath" value="${basedir}/lib/cdk-1.2.x-20090116.jar"/>
+            <param name="description" value="Benchmark of path based hashed fingperints"/>
+        </driver>
+        <driver name="CDK-trunk-13858">
+            <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.FingerprintCDKBench"/>
+            <param name="japex.classPath" value="${basedir}/lib/cdk-trunk-13858.jar"/>
+            <param name="description" value="Benchmark of path based hashed fingperints"/>
+        </driver>        
+    </driverGroup>
+
+    <testCase name="test1">
+        <param name="japex.inputFile" value="data/fingerprint.txt" />
+    </testCase>    
+</testSuite>
