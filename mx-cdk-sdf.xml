@@ -9,7 +9,7 @@
   <driverGroup name="MX-CDK-SDF" xmlns="http://www.sun.com/japex/testSuite">
     <driver name="CDK-1.2.x">
       <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.CDKSDFBench"/>
-      <param name="japex.classPath" value="${basedir}/lib/cdk-trunk-13858.jar"/>
+      <param name="japex.classPath" value="${basedir}/lib/cdk-1.2.x-20090116.jar"/>
       <param name="description" value="Reads SD file, prints sum of calculated molecular masses."/>
     </driver>
     <driver name="mx-0.108.1">
