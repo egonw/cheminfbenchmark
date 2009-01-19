@@ -19,7 +19,7 @@
   <property name="license.file" location="LICENSE.txt" />
   <property name="junit.lib" value="${lib.dir}/junit-4.5.jar" />
   <property name="test.class" value = "net.openmolecules.benchmark.test.Main" />
-  <property name="config" value="smiles-parse-config.xml"/>
+  <property name="config" value="mx-cdk-sdf.xml"/>
   <!-- filesets -->
   <fileset dir="${lib.dir}" id="libs">
     <include name="**/*.jar" />
