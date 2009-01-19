@@ -40,9 +40,6 @@ public class MXSDFBench extends JapexDriverBase
       //audit += Double.parseDouble(reader.getData("PUBCHEM_MOLECULAR_WEIGHT"));
     }
     
-    System.out.println("sum=" + sum);
-    //System.out.println("audit=" + audit);
-    
     reader.close();
   }
   
