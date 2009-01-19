@@ -12,7 +12,7 @@
     <driverGroup name="SMARTSParsing" xmlns="http://www.sun.com/japex/testSuite">
         <driver name="CDK-1.2.x">
             <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.SMARTSParseCDKBench"/>
-            <param name="japex.classPath" value="${basedir}/lib/cdk-1.2.x-20090112.jar"/>
+            <param name="japex.classPath" value="${basedir}/lib/cdk-1.2.x-20090116.jar"/>
             <param name="description" value="T#7 - reads 260 SMARTS patterns into a String[], time to parse them all. Due
             to the nature of the parser, each parse operation necessitates instantiation of a new SMARTSParser object
             whose time is thus included in the parse time."/>
