@@ -27,7 +27,6 @@ public class MXSDFBench extends JapexDriverBase
   public void run(TestCase testCase)
   {
     double sum = 0;
-    //double audit = 0;
     MassCalculator calculator = new MassCalculator();
     SDFileReader reader = createReader(testCase.getParam("japex.inputFile"));
     
@@ -37,11 +36,7 @@ public class MXSDFBench extends JapexDriverBase
 
       Molecule molecule = reader.getMolecule();
       sum += calculator.findAveragedMass(molecule);
-      //audit += Double.parseDouble(reader.getData("PUBCHEM_MOLECULAR_WEIGHT"));
     }
-    
-    System.out.println("sum=" + sum);
-    //System.out.println("audit=" + audit);
     
     reader.close();
   }
