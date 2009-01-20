@@ -71,6 +71,8 @@ public class MXRingBench extends JapexDriverBase
     {
       sum += finder.findRings(molecule).size();
     }
+    
+    System.out.println("sum=" + sum);
   }
 
   private SDFileReader createReader(String filename)

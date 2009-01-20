@@ -88,6 +88,8 @@ public class CDKRingBench extends JapexDriverBase
         throw new RuntimeException(e);
       }
     }
+    
+    System.out.println("sum=" + sum);
   }
 
   private IteratingMDLReader getReader(String filename)
