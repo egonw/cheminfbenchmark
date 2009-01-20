@@ -24,56 +24,67 @@
 
 package net.openmolecules.benchmark.driver;
 
-import com.metamolecular.mx.calc.MassCalculator;
 import com.metamolecular.mx.io.mdl.SDFileReader;
 import com.metamolecular.mx.model.Molecule;
+import com.metamolecular.mx.ring.HanserRingFinder;
+import com.metamolecular.mx.ring.RingFinder;
 import com.sun.japex.JapexDriverBase;
 import com.sun.japex.TestCase;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Richard L. Apodaca
  */
-public class MXSDFBench extends JapexDriverBase
+public class MXRingBench extends JapexDriverBase
 {
+
+  private List<Molecule> molecules;
+  private RingFinder finder;
+
   @Override
   public void prepare(TestCase testCase)
   {
+    molecules = new ArrayList();
+    SDFileReader reader = createReader(testCase.getParam("japex.inputFile"));
+    finder = new HanserRingFinder();
 
+    while (reader.hasNextRecord())
+    {
+      reader.nextRecord();
+      
+      Molecule molecule = reader.getMolecule(true);
+      
+      molecules.add(molecule);
+    }
+
+    reader.close();
   }
 
   @Override
   public void run(TestCase testCase)
   {
     int sum = 0;
-    MassCalculator calculator = new MassCalculator();
-    SDFileReader reader = createReader(testCase.getParam("japex.inputFile"));
     
-    while (reader.hasNextRecord())
+    for (Molecule molecule : molecules)
     {
-      reader.nextRecord();
-
-      Molecule molecule = reader.getMolecule();
-      sum += calculator.findAveragedMass(molecule);
+      sum += finder.findRings(molecule).size();
     }
-    
-    reader.close();
   }
-  
+
   private SDFileReader createReader(String filename)
   {
     SDFileReader result = null;
-    
+
     try
     {
       result = new SDFileReader(filename);
-    }
-    
-    catch(IOException e)
+    } catch (IOException e)
     {
       throw new RuntimeException(e);
     }
-    
+
     return result;
   }
 }

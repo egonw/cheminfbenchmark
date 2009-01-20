@@ -24,56 +24,86 @@
 
 package net.openmolecules.benchmark.driver;
 
-import com.metamolecular.mx.calc.MassCalculator;
-import com.metamolecular.mx.io.mdl.SDFileReader;
-import com.metamolecular.mx.model.Molecule;
 import com.sun.japex.JapexDriverBase;
 import com.sun.japex.TestCase;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
+import org.openscience.cdk.DefaultChemObjectBuilder;
+import org.openscience.cdk.exception.CDKException;
+import org.openscience.cdk.interfaces.IAtomContainer;
+import org.openscience.cdk.interfaces.IMolecule;
+import org.openscience.cdk.io.iterator.IteratingMDLReader;
+import org.openscience.cdk.ringsearch.AllRingsFinder;
+import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 
 /**
  * @author Richard L. Apodaca
  */
-public class MXSDFBench extends JapexDriverBase
+public class CDKRingBench extends JapexDriverBase
 {
+  private List<IAtomContainer> molecules;
+  private AllRingsFinder finder;
+
   @Override
   public void prepare(TestCase testCase)
   {
+    molecules = new ArrayList();
+    finder = new AllRingsFinder();
+    IteratingMDLReader reader = getReader(testCase.getParam("japex.inputFile"));
 
+    while (reader.hasNext())
+    {
+      IAtomContainer molecule = (IMolecule) reader.next();
+      
+      molecule = AtomContainerManipulator.removeHydrogens(molecule);
+      molecules.add(molecule);
+    }
+
+    try
+    {
+      reader.close();
+    }
+    
+    catch (IOException e)
+    {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override
   public void run(TestCase testCase)
   {
     int sum = 0;
-    MassCalculator calculator = new MassCalculator();
-    SDFileReader reader = createReader(testCase.getParam("japex.inputFile"));
-    
-    while (reader.hasNextRecord())
-    {
-      reader.nextRecord();
 
-      Molecule molecule = reader.getMolecule();
-      sum += calculator.findAveragedMass(molecule);
+    for (IAtomContainer molecule : molecules)
+    {
+      try
+      {
+        sum += finder.findAllRings(molecule).getAtomContainerCount();
+      } catch (CDKException e)
+      {
+        throw new RuntimeException(e);
+      }
     }
-    
-    reader.close();
   }
-  
-  private SDFileReader createReader(String filename)
+
+  private IteratingMDLReader getReader(String filename)
   {
-    SDFileReader result = null;
-    
+    IteratingMDLReader result = null;
+
     try
     {
-      result = new SDFileReader(filename);
-    }
-    
-    catch(IOException e)
+      Reader raw = new FileReader(filename);
+
+      result = new IteratingMDLReader(raw, DefaultChemObjectBuilder.getInstance());
+    } catch (Exception e)
     {
       throw new RuntimeException(e);
     }
-    
+
     return result;
   }
 }
