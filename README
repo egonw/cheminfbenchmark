@@ -33,3 +33,11 @@ make the outcome unfavourable, but toolkits may do that if they wish.
 5. Parse a collection of SMILES - this will be a measure of performance and completeness
 6. Detect rings in a collection of molecules.
 7. Parse (not perform the search) for a collection of SMARTS patterns - this will be a measure of performance and completeness
+
+Running tests
+-------------
+
+Each test is run via a configure file. A test can be run by
+
+$ ant -Dconfig=test-config.xml run
+
