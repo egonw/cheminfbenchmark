@@ -45,7 +45,7 @@ public class MXSDFBench extends JapexDriverBase
   @Override
   public void run(TestCase testCase)
   {
-    int sum = 0;
+    double sum = 0;
     MassCalculator calculator = new MassCalculator();
     SDFileReader reader = createReader(testCase.getParam("japex.inputFile"));
     
