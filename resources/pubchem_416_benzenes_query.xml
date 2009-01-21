@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PCT-Data PUBLIC "-//NCBI//NCBI PCTools/EN" "http://pubchem.ncbi.nlm.nih.gov/pug/pug.dtd">
+<PCT-Data>
+  <PCT-Data_input>
+    <PCT-InputData>
+      <PCT-InputData_query>
+        <PCT-Query>
+          <PCT-Query_type>
+            <PCT-QueryType>
+              <PCT-QueryType_css>
+                <PCT-QueryCompoundCS>
+                  <PCT-QueryCompoundCS_query>
+                    <PCT-QueryCompoundCS_query_data>C1=CC=CC=C1</PCT-QueryCompoundCS_query_data>
+                  </PCT-QueryCompoundCS_query>
+                  <PCT-QueryCompoundCS_type>
+                    <PCT-QueryCompoundCS_type_subss>
+                      <PCT-CSStructure>
+                        <PCT-CSStructure_isotopes value="false"/>
+                        <PCT-CSStructure_charges value="false"/>
+                        <PCT-CSStructure_tautomers value="false"/>
+                        <PCT-CSStructure_rings value="false"/>
+                        <PCT-CSStructure_bonds value="true"/>
+                        <PCT-CSStructure_chains value="true"/>
+                        <PCT-CSStructure_hydrogen value="false"/>
+                      </PCT-CSStructure>
+                    </PCT-QueryCompoundCS_type_subss>
+                  </PCT-QueryCompoundCS_type>
+                  <PCT-QueryCompoundCS_results>1000</PCT-QueryCompoundCS_results>
+                </PCT-QueryCompoundCS>
+              </PCT-QueryType_css>
+            </PCT-QueryType>
+            <PCT-QueryType>
+              <PCT-QueryType_cel>
+                <PCT-QueryCompoundEL>
+                  <PCT-QueryCompoundEL_property>
+                    <PCT-CLByProperty>
+                      <PCT-CLByProperty_type value="mw">1</PCT-CLByProperty_type>
+                      <PCT-CLByProperty_range>
+                        <PCT-CLByProperty_range_frange>
+                          <PCT-CLFloatRange>
+                            <PCT-CLFloatRange_lower>300</PCT-CLFloatRange_lower>
+                            <PCT-CLFloatRange_upper>500</PCT-CLFloatRange_upper>
+                          </PCT-CLFloatRange>
+                        </PCT-CLByProperty_range_frange>
+                      </PCT-CLByProperty_range>
+                    </PCT-CLByProperty>
+                  </PCT-QueryCompoundEL_property>
+                </PCT-QueryCompoundEL>
+              </PCT-QueryType_cel>
+            </PCT-QueryType>
+          </PCT-Query_type>
+        </PCT-Query>
+      </PCT-InputData_query>
+    </PCT-InputData>
+  </PCT-Data_input>
+</PCT-Data>
