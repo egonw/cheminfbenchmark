@@ -4,21 +4,21 @@
   <param name="japex.classPath" value="build/classes"/>
   <param name="japex.resultUnit" value="ms"/>
   <param name="japex.warmupIterations" value="10"/>
-  <param name="japex.runIterations" value="10"/>
+  <param name="japex.runIterations" value="5"/>
   <param name="japex.reportsDirectory" value="build/reports"/>
   <driverGroup name="Ring Benchmark" xmlns="http://www.sun.com/japex/testSuite">
     <driver name="CDK-1.2.x">
       <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.CDKRingBench"/>
       <param name="japex.classPath" value="${basedir}/lib/cdk-1.2.x-20090116.jar"/>
-      <param name="description" value="Reads SD file, counts all rings in each structure."/>
+      <param name="description" value="Reads SD file, finds all rings in each hydrogen-suppressed structure."/>
     </driver>
     <driver name="mx-0.108.1">
       <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.MXRingBench"/>
       <param name="japex.classPath" value="${basedir}/lib/mx-0.108.1.jar"/>
-      <param name="description" value="Reads SD file, counts all rings in each structure."/>
+      <param name="description" value="Reads SD file, finds all rings in each hydrogen-suppressed structure."/>
     </driver>
   </driverGroup>
-  <testCase name="CDK and MX Read 33-Record SD File and Count Rings in Each Structure">
-    <param name="japex.inputFile" value="data/steroids.sdf" />
+  <testCase name="Read 416-Record PubChem SD File and Find All Rings in Each Hydrogen-Suppressed Structure">
+    <param name="japex.inputFile" value="data/pubchem_416_benzenes.sdf" />
   </testCase>
 </testSuite>

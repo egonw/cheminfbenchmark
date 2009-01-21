@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package net.openmolecules.benchmark.driver;
 
 import com.sun.japex.JapexDriverBase;
@@ -45,19 +44,17 @@ import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 public class CDKRingBench extends JapexDriverBase
 {
   private List<IAtomContainer> molecules;
-  private AllRingsFinder finder;
 
   @Override
   public void prepare(TestCase testCase)
   {
     molecules = new ArrayList();
-    finder = new AllRingsFinder();
     IteratingMDLReader reader = getReader(testCase.getParam("japex.inputFile"));
 
     while (reader.hasNext())
     {
       IAtomContainer molecule = (IMolecule) reader.next();
-      
+
       molecule = AtomContainerManipulator.removeHydrogens(molecule);
       molecules.add(molecule);
     }
@@ -66,7 +63,6 @@ public class CDKRingBench extends JapexDriverBase
     {
       reader.close();
     }
-    
     catch (IOException e)
     {
       throw new RuntimeException(e);
@@ -76,20 +72,19 @@ public class CDKRingBench extends JapexDriverBase
   @Override
   public void run(TestCase testCase)
   {
-    int sum = 0;
+    AllRingsFinder finder = new AllRingsFinder();
 
     for (IAtomContainer molecule : molecules)
     {
       try
       {
-        sum += finder.findAllRings(molecule).getAtomContainerCount();
-      } catch (CDKException e)
+        finder.findAllRings(molecule);
+      }
+      catch (CDKException e)
       {
         throw new RuntimeException(e);
       }
     }
-    
-    System.out.println("sum=" + sum);
   }
 
   private IteratingMDLReader getReader(String filename)
@@ -101,7 +96,8 @@ public class CDKRingBench extends JapexDriverBase
       Reader raw = new FileReader(filename);
 
       result = new IteratingMDLReader(raw, DefaultChemObjectBuilder.getInstance());
-    } catch (Exception e)
+    }
+    catch (Exception e)
     {
       throw new RuntimeException(e);
     }

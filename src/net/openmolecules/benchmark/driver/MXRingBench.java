@@ -41,14 +41,12 @@ public class MXRingBench extends JapexDriverBase
 {
 
   private List<Molecule> molecules;
-  private RingFinder finder;
 
   @Override
   public void prepare(TestCase testCase)
   {
     molecules = new ArrayList();
     SDFileReader reader = createReader(testCase.getParam("japex.inputFile"));
-    finder = new HanserRingFinder();
 
     while (reader.hasNextRecord())
     {
@@ -65,14 +63,12 @@ public class MXRingBench extends JapexDriverBase
   @Override
   public void run(TestCase testCase)
   {
-    int sum = 0;
+    RingFinder finder = new HanserRingFinder();
     
     for (Molecule molecule : molecules)
     {
-      sum += finder.findRings(molecule).size();
+      finder.findRings(molecule);
     }
-    
-    System.out.println("sum=" + sum);
   }
 
   private SDFileReader createReader(String filename)
