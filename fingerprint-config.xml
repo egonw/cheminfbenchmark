@@ -15,13 +15,33 @@
             <param name="japex.classPath" value="${basedir}/lib/cdk-1.2.x-20090116.jar"/>
             <param name="description" value="Benchmark of path based hashed fingperints based on 22 molecules.
 	Before fingerprints, atom typing and aromatcity perception is performed."/>
+	        <param name="chemObjectBuilder"
+	            value="org.openscience.cdk.DefaultChemObjectBuilder"/>
+        </driver>
+        <driver name="CDK-1.2.x-nonotify">
+            <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.FingerprintCDKBench"/>
+            <param name="japex.classPath" value="${basedir}/lib/cdk-1.2.x-20090116.jar"/>
+            <param name="description" value="Benchmark of path based hashed fingperints based on 22 molecules.
+    Before fingerprints, atom typing and aromatcity perception is performed."/>
+            <param name="chemObjectBuilder"
+                value="org.openscience.cdk.nonotify.NoNotificationChemObjectBuilder"/>
         </driver>
         <driver name="CDK-trunk-13858">
             <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.FingerprintCDKBench"/>
             <param name="japex.classPath" value="${basedir}/lib/cdk-trunk-13858.jar"/>
             <param name="description" value="Benchmark of path based hashed fingperints based on 22 molecules
 	Before fingerprints, atom typing and aromaticity perception is performed"/>
+            <param name="chemObjectBuilder"
+                value="org.openscience.cdk.DefaultChemObjectBuilder"/>
         </driver>        
+        <driver name="CDK-trunk-13858-nonotify">
+            <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.FingerprintCDKBench"/>
+            <param name="japex.classPath" value="${basedir}/lib/cdk-trunk-13858.jar"/>
+            <param name="description" value="Benchmark of path based hashed fingperints based on 22 molecules
+    Before fingerprints, atom typing and aromaticity perception is performed"/>
+            <param name="chemObjectBuilder"
+                value="org.openscience.cdk.nonotify.NoNotificationChemObjectBuilder"/>
+        </driver>
     </driverGroup>
 
     <testCase name="test1">

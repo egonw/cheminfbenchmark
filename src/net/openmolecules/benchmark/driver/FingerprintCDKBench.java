@@ -32,11 +32,14 @@ import org.openscience.cdk.fingerprint.ExtendedFingerprinter;
 import org.openscience.cdk.fingerprint.Fingerprinter;
 import org.openscience.cdk.fingerprint.IFingerprinter;
 import org.openscience.cdk.interfaces.IAtomContainer;
+import org.openscience.cdk.interfaces.IChemObjectBuilder;
 import org.openscience.cdk.io.iterator.IteratingSMILESReader;
 import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,13 +63,22 @@ public class FingerprintCDKBench extends JapexDriverBase {
         String fileName = testCase.getParam("japex.inputFile");
         int length = Integer.parseInt(testCase.getParam("fplength"));
         int depth = Integer.parseInt(testCase.getParam("fpdepth"));
+        String chemObjectBuilder = getParam("chemObjectBuilder");
         String type = testCase.getParam("type");
         if (type.equals("standard")) fingerprinter = new Fingerprinter(length, depth);
         else if (type.equals("extended")) fingerprinter = new ExtendedFingerprinter(length, depth);
 
         mols = new ArrayList<IAtomContainer>();
         try {
-            IteratingSMILESReader reader = new IteratingSMILESReader(new FileInputStream(fileName));
+        	Class clazz = this.getClass().getClassLoader()
+        	    .loadClass(chemObjectBuilder);
+        	Method getInstance = clazz.getMethod("getInstance", new Class[]{});
+        	IChemObjectBuilder builder =
+        		(IChemObjectBuilder)getInstance.invoke(new Class[]{});
+            IteratingSMILESReader reader = new IteratingSMILESReader(
+            	new FileInputStream(fileName), builder
+            	
+            );
             while (reader.hasNext()) {
                 IAtomContainer tmp = (IAtomContainer) reader.next();
                 AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(tmp);
@@ -75,7 +87,13 @@ public class FingerprintCDKBench extends JapexDriverBase {
             }
         } catch (FileNotFoundException e) {
         } catch (CDKException e) {            
-        }
+        } catch (ClassNotFoundException e) {
+		} catch (SecurityException e) {
+		} catch (NoSuchMethodException e) {
+		} catch (IllegalArgumentException e) {
+		} catch (IllegalAccessException e) {
+		} catch (InvocationTargetException e) {
+		}
     }
 
     public void run(TestCase testCase) {
