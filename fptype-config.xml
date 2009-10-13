@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testSuite name="CheminfoBench" xmlns="http://www.sun.com/japex/testSuite">
+    
+  <param name="basedir" 
+         value="."/>
+  <param name="japex.classPath" 
+         value="build/classes" />
+  <param name="japex.resultUnit" 
+         value="ms" />
+  <param name="japex.warmupIterations" 
+         value="5" />
+  <param name="japex.runIterations" 
+         value="25" />
+  <param name="japex.reportsDirectory" 
+         value="build/reports" />
+ 
+  <driverGroup name="Fingerprints" 
+               xmlns="http://www.sun.com/japex/testSuite">
+    
+    <driver name="Fingerprinter">
+      <param name="japex.driverClass" 
+             value="net.openmolecules.benchmark.driver.fingerPrinting.FingerprinterDriver" />
+      <param name="japex.classPath" 
+             value="${basedir}/lib/cdk-1.3.x-20091008.jar" />
+      <param name="description" 
+             value="" />
+      <param name="chemObjectBuilder"
+             value="org.openscience.cdk.DefaultChemObjectBuilder" />
+    </driver>
+    
+    <driver name="ExtendedFingerprinter">
+      <param name="japex.driverClass" 
+             value="net.openmolecules.benchmark.driver.fingerPrinting.ExtendedFingerprinterDriver" />
+      <param name="japex.classPath" 
+             value="${basedir}/lib/cdk-1.3.x-20091008.jar" />
+      <param name="description" 
+             value="" />
+      <param name="chemObjectBuilder"
+             value="org.openscience.cdk.DefaultChemObjectBuilder" />
+    </driver>
+    
+    <driver name="MACCSFingerprinter">
+      <param name="japex.driverClass" 
+             value="net.openmolecules.benchmark.driver.fingerPrinting.MACCSFingerprinterDriver" />
+      <param name="japex.classPath" 
+             value="${basedir}/lib/cdk-1.3.x-20091008.jar" />
+      <param name="description" 
+             value="" />
+      <param name="chemObjectBuilder"
+             value="org.openscience.cdk.DefaultChemObjectBuilder" />
+    </driver>
+    
+    <driver name="EStateFingerprinter">
+      <param name="japex.driverClass" 
+             value="net.openmolecules.benchmark.driver.fingerPrinting.EStateFingerprinterDriver" />
+      <param name="japex.classPath" 
+             value="${basedir}/lib/cdk-1.3.x-20091008.jar" />
+      <param name="description" 
+             value="" />
+      <param name="chemObjectBuilder"
+             value="org.openscience.cdk.DefaultChemObjectBuilder" />
+    </driver>
+    
+    <driver name="SubstructureFingerprinter">
+      <param name="japex.driverClass" 
+             value="net.openmolecules.benchmark.driver.fingerPrinting.SubstructureFingerprinterDriver" />
+      <param name="japex.classPath" 
+             value="${basedir}/lib/cdk-1.3.x-20091008.jar" />
+      <param name="description" 
+             value="" />
+      <param name="chemObjectBuilder"
+             value="org.openscience.cdk.DefaultChemObjectBuilder" />
+    </driver>
+    
+    <driver name="PubchemFingerprinter">
+      <param name="japex.driverClass" 
+             value="net.openmolecules.benchmark.driver.fingerPrinting.PubchemFingerprinterDriver" />
+      <param name="japex.classPath" 
+             value="${basedir}/lib/cdk-1.3.x-20091008.jar" />
+      <param name="description" 
+             value="" />
+      <param name="chemObjectBuilder"
+             value="org.openscience.cdk.DefaultChemObjectBuilder" />
+    </driver>
+  </driverGroup>
+ 
+  <testCase name="test">
+    <param name="japex.inputFile" value="data/fingerprint.txt" />
+    <param name="fplength" value="1024" />
+    <param name="fpdepth" value="8" />
+    <param name="type" value="standard" />
+  </testCase>
+
+</testSuite>
