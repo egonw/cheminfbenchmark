@@ -41,3 +41,4 @@ Each test is run via a configure file. A test can be run by
 
 $ ant -Dconfig=test-config.xml run
 
+Make sure to replace test-config.xml with an existing config file.
