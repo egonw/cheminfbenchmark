@@ -12,6 +12,11 @@
       <param name="japex.classPath" value="${basedir}/lib/cdk-1.2.x-20090116.jar"/>
       <param name="description" value="Reads SD file, prints sum of calculated molecular masses."/>
     </driver>
+    <driver name="CDK-1.3.x">
+      <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.CDKSDFBench"/>
+      <param name="japex.classPath" value="${basedir}/lib/cdk-1.3.x-20091008.jar"/>
+      <param name="description" value="Reads SD file, prints sum of calculated molecular masses."/>
+    </driver>
     <driver name="mx-0.108.1">
       <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.MXSDFBench"/>
       <param name="japex.classPath" value="${basedir}/lib/mx-0.108.1.jar"/>
