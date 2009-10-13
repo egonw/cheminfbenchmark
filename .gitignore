@@ -4,3 +4,5 @@ build
 *.iml
 *.iws
 .DS_Store
+bin
+
