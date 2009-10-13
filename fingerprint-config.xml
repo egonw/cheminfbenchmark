@@ -28,7 +28,7 @@
         </driver>
         <driver name="CDK-trunk-13858">
             <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.FingerprintCDKBench"/>
-            <param name="japex.classPath" value="${basedir}/lib/cdk-trunk-13858.jar"/>
+            <param name="japex.classPath" value="${basedir}/lib/cdk-1.3.x-20091008.jar"/>
             <param name="description" value="Benchmark of path based hashed fingperints based on 22 molecules
 	Before fingerprints, atom typing and aromaticity perception is performed"/>
             <param name="chemObjectBuilder"
@@ -36,7 +36,7 @@
         </driver>        
         <driver name="CDK-trunk-13858-nonotify">
             <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.FingerprintCDKBench"/>
-            <param name="japex.classPath" value="${basedir}/lib/cdk-trunk-13858.jar"/>
+            <param name="japex.classPath" value="${basedir}/lib/cdk-1.3.x-20091008.jar"/>
             <param name="description" value="Benchmark of path based hashed fingperints based on 22 molecules
     Before fingerprints, atom typing and aromaticity perception is performed"/>
             <param name="chemObjectBuilder"
