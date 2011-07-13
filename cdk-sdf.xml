@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testSuite name="CheminfoBench" xmlns="http://www.sun.com/japex/testSuite">
+  <param name="basedir" value="."/>
+  <param name="japex.classPath" value="build/classes"/>
+  <param name="japex.resultUnit" value="ms"/>
+  <param name="japex.warmupIterations" value="10"/>
+  <param name="japex.warmupsPerDriver" value="3"/>
+  <param name="japex.runIterations" value="100"/>
+  <param name="japex.runsPerDriver" value="3"/>
+  <param name="japex.reportsDirectory" value="build/reports"/>
+  <driverGroup name="MX-CDK-SDF" xmlns="http://www.sun.com/japex/testSuite">
+    <driver name="CDK-1.4.x-Data">
+      <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.CDKSDFBench14"/>
+      <param name="japex.classPath" value="${basedir}/lib/cdk-1.4.0.jar"/>
+      <param name="description" value="Reads SD file, prints sum of calculated molecular masses."/>
+      <param name="chemObjectBuilder"
+             value="org.openscience.cdk.DefaultChemObjectBuilder"/>
+    </driver>
+    <driver name="CDK-1.4.x-Nonotify">
+      <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.CDKSDFBenchNonotify14"/>
+      <param name="japex.classPath" value="${basedir}/lib/cdk-1.4.0.jar"/>
+      <param name="description" value="Reads SD file, prints sum of calculated molecular masses."/>
+      <param name="chemObjectBuilder"
+             value="org.openscience.cdk.nonotify.NoNotificationChemObjectBuilder"/>
+    </driver>
+    <driver name="CDK-1.4.x-Silent">
+      <param name="japex.driverClass" value="net.openmolecules.benchmark.driver.CDKSDFBenchSilent14"/>
+      <param name="japex.classPath" value="${basedir}/lib/cdk-1.4.0.jar"/>
+      <param name="description" value="Reads SD file, prints sum of calculated molecular masses."/>
+      <param name="chemObjectBuilder"
+             value="org.openscience.cdk.silent.SilentChemObjectBuilder"/>
+    </driver>
+  </driverGroup>
+  <testCase name="CDK Read 416-Record SD File and Calculate Sum of Molecular Masses">
+    <param name="japex.inputFile" value="data/pubchem_416_benzenes.sdf" />
+  </testCase>
+</testSuite>
