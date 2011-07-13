@@ -27,10 +27,12 @@ package net.openmolecules.benchmark.driver;
 
 import com.sun.japex.JapexDriverBase;
 import com.sun.japex.TestCase;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import org.openscience.cdk.DefaultChemObjectBuilder;
+import org.openscience.cdk.interfaces.IChemObjectBuilder;
 import org.openscience.cdk.interfaces.IMolecule;
 import org.openscience.cdk.io.iterator.IteratingMDLReader;
 import org.openscience.cdk.qsar.descriptors.molecular.WeightDescriptor;
@@ -39,13 +41,10 @@ import org.openscience.cdk.qsar.result.DoubleResult;
 /**
  * @author Richard L. Apodaca
  */
-public class CDKSDFBench14 extends JapexDriverBase
-{
+public class CDKSDFBench14 extends JapexDriverBase {
 
   @Override
-  public void prepare()
-  {
-  }
+  public void prepare() {}
 
   @Override
   public void run(TestCase testCase)
@@ -79,8 +78,13 @@ public class CDKSDFBench14 extends JapexDriverBase
     {
       Reader raw = new FileReader(filename);
       //BufferedReader reader = new BufferedReader(raw);
+      String chemObjectBuilder = getParam("chemObjectBuilder");
+      Class clazz = this.getClass().getClassLoader()
+        .loadClass(chemObjectBuilder);
+      Method getInstance = clazz.getMethod("getInstance", new Class[]{});
+      IChemObjectBuilder builder = (IChemObjectBuilder)getInstance.invoke(new Class[]{});
 
-      result = new IteratingMDLReader(raw, DefaultChemObjectBuilder.getInstance());
+      result = new IteratingMDLReader(raw, builder);
     } catch (Exception e)
     {
       throw new RuntimeException(e.getMessage(), e);
